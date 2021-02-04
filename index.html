@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Scrollbar</title>
+</head>
+<body>
+  <div>
+    Example1: You can scroll horizontally.
+    <div class="wrapper">
+      <div class="card-container">
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    Example2: When scrollbar is designated to "display: none;", you can scroll horizontally in the same way as above.
+    <div class="wrapper">
+      <div class="card-container no-scrollbar">
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    Example3: In addition to above, when "backface-visibility" property is set to "hidden" and set pseudo-element to the parent element of card-container, horizontal scroll is disabled.
+    <div class="wrapper backface-visibility pseudo-element">
+      <div class="card-container no-scrollbar">
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    Example4: In addition to above, when any background-color is set, horizontal scroll is enabled.
+    <div class="wrapper backface-visibility pseudo-element">
+      <div class="card-container no-scrollbar bg-aquamarine">
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+      </div>
+    </div>
+  </div>
+</body>
+<style>
+  .wrapper {
+    margin-bottom: 4rem;
+
+    /* required */
+    position: relative;
+  }
+
+  .card-container {
+    padding: 1rem;
+
+    /* required */
+    display: flex;
+    overflow-x: scroll;
+  }
+
+  .card {
+    min-width: 20rem;
+    height: 10rem;
+    margin-right: 1rem;
+    background-color: lightsalmon;
+
+    /* required */
+    position: relative;
+  }
+
+
+  /*
+  * When following classes are applied together, scroll is disabled.
+  */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .backface-visibility {
+    backface-visibility: hidden;
+  }
+
+  .pseudo-element::before {
+    width: 1rem;
+    height: 100%;
+    content: "";
+    z-index: 2;
+    left: 0;
+    position: absolute;
+  }
+  .pseudo-element::after {
+    width: 1rem;
+    height: 100%;
+    content: "";
+    z-index: 2;
+    right: 0;
+    position: absolute;
+  }
+
+
+  /* When background-color is set, scroll is enabled even though above 3 classes are designated. */
+  .bg-aquamarine {
+    background-color: aquamarine;
+  }
+</style>
+</html>
